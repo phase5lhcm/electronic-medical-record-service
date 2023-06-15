@@ -26,6 +26,7 @@ dependencies {
 	// https://mvnrepository.com/artifact/com.netflix.graphql.dgs/graphql-dgs-extended-scalars
 	implementation group: 'com.netflix.graphql.dgs', name: 'graphql-dgs-extended-scalars', version: '7.2.0'
 	implementation 'net.datafaker:datafaker:1.9.0'
+	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
 }
 
 tasks.named('test') {
