@@ -1,0 +1,37 @@
+type Patient {
+    name: String!
+    medicalRecordNumber: Int!
+    address: Address!
+    gender: String
+    contactNumber: String
+    primary: PrimaryCareDoctor
+    preferredPharmacy: Pharmacy
+}
+
+type PrimaryCareDoctor {
+    name: String!
+    locations: [Address!]!
+    emailAddress: String!
+}
+
+type SpecialtyDoctor {
+    name: String!
+    specialty: Specialty!
+    contactNumber: String!
+}
+
+type Specialty {
+    specialty: String!
+}
+
+type Address {
+    street: String!
+    city: String!
+    zipCode: String
+    state: String!
+}
+
+type Pharmacy {
+    name: String!
+    contactNumber: String!
+}

@@ -19,8 +19,8 @@ public class FakeEMRDataSource {
     @PostConstruct
     private void postConstruct() {
         for (int i = 0; i < 5; i++){
-            var patient = Patient.newBuilder().medicalNumber(faker.random().nextInt(2000))
-                    .text(faker.company().name())
+            var patient = Patient.newBuilder().medicalRecordNumber(faker.random().nextInt(2000))
+                    .name(faker.company().name())
                     .build();
 
             PATIENT_LIST.add(patient);

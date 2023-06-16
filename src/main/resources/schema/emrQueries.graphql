@@ -1,9 +1,5 @@
-type Patient {
-    text: String!
-    medicalNumber: Int
-}
-
 type Query {
     allPatients: [Patient]
     onePatient: Patient
+    specialtyDoctors(specialty: String): [SpecialtyDoctor]
 }

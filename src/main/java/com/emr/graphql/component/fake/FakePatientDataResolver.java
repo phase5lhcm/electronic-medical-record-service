@@ -13,7 +13,6 @@ public class FakePatientDataResolver {
     @DgsQuery
     public List<Patient> allPatients() {
         return FakeEMRDataSource.PATIENT_LIST;
-
     }
     @DgsQuery
     public Patient onePatient() {
