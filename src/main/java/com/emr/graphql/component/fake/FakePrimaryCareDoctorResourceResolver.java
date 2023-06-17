@@ -1,8 +1,6 @@
 package com.emr.graphql.component.fake;
 
-import com.emr.graphql.datasource.fake.FakeEMRDataSource;
 import com.emr.graphql.datasource.fake.FakePrimaryCareDoctorDAO;
-import com.netflix.dgs.codegen.generated.types.Patient;
 import com.netflix.dgs.codegen.generated.types.PrimaryCareDoctor;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsQuery;

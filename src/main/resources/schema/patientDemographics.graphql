@@ -1,7 +1,7 @@
 type Patient {
-    name: String!
-    medicalRecordNumber: Int!
-    address: Address!
+    name: String
+    medicalRecordNumber: Int
+    address: Address
     gender: String
     contactNumber: String
     primary: PrimaryCareDoctor
@@ -9,9 +9,9 @@ type Patient {
 }
 
 type PrimaryCareDoctor {
-    name: String!
+    name: String
     locations: [Address!]!
-    emailAddress: String!
+    emailAddress: String
 }
 
 #for getting patient by pcp

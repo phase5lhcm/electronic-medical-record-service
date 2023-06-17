@@ -1,8 +1,6 @@
 package com.emr.graphql.datasource.fake;
 
-import com.emr.graphql.component.fake.FakePatientDataResolver;
 import com.netflix.dgs.codegen.generated.types.Address;
-import com.netflix.dgs.codegen.generated.types.Patient;
 import com.netflix.dgs.codegen.generated.types.PrimaryCareDoctor;
 import jakarta.annotation.PostConstruct;
 import net.datafaker.Faker;
