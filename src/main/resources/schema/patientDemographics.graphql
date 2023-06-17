@@ -14,6 +14,12 @@ type PrimaryCareDoctor {
     emailAddress: String!
 }
 
+#for getting patient by pcp
+input PatientsByPrimaryCareDoctorFilter {
+    name: String
+    emailAddress: String
+}
+
 type SpecialtyDoctor {
     name: String!
     specialty: Specialty!
@@ -34,4 +40,9 @@ type Address {
 type Pharmacy {
     name: String!
     contactNumber: String!
+    zipCode: String
+}
+
+input PharmacyInput {
+    zipCode: String
 }

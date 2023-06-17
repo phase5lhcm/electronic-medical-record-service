@@ -10,9 +10,10 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Configuration
-public class FakeEMRDataSource {
+public class FakePatientDAO {
     @Autowired
     private Faker faker;
 
@@ -21,14 +22,26 @@ public class FakeEMRDataSource {
     @PostConstruct
     private void postConstruct() {
         for (int i = 0; i < 5; i++){
-            var address = Address.newBuilder().street(faker.address().streetAddress())
+            var pcpLocations =  new ArrayList<Address>();
+            var patientAddress = Address.newBuilder().street(faker.address().streetAddress())
                         .city(faker.address().cityName()).state(faker.address().stateAbbr())
                         .zipCode(faker.address().zipCode())
                         .build();
+            for(int j = 0; j < ThreadLocalRandom.current().nextInt(1, 2); j++){
+                var pcpLocation = Address.newBuilder().street(faker.address().streetAddress())
+                        .city(faker.address().cityName()).state(faker.address().stateAbbr())
+                        .zipCode(faker.address().zipCode())
+                        .build();
+                pcpLocations.add(pcpLocation);
+            }
+            var pcp = PrimaryCareDoctor.newBuilder().name(faker.name().fullName())
+                    .locations(pcpLocations).emailAddress(faker.name().lastName() + "@mail.com")
+                    .build();
             var patient = Patient.newBuilder().name(faker.name().fullName())
                     .medicalRecordNumber(faker.random().nextInt(2000))
-                    .address(address).gender(faker.gender().binaryTypes())
+                    .address(patientAddress).gender(faker.gender().binaryTypes())
                     .contactNumber(String.valueOf(faker.phoneNumber().phoneNumber()))
+                    .primary(pcp)
                     .build();
 
             PATIENT_LIST.add(patient);
