@@ -24,7 +24,11 @@ public class FakeSpecialtyDoctorDataResolver {
                 // return filtered specialtyDoctors. Identify by specialty
                 return FakeSpecialtyDoctorDataSource.SPECIALTY_DOCTOR_LIST.stream()
                         .filter(s -> StringUtils.containsIgnoreCase(
-                                (CharSequence) s.getSpecialty(), specialty
+                                // for some reason, an error is being thrown to explicitly cast
+                                // the return value for Specialty to a CharSequence. But this makes it impossible for the
+                                // user to use a string to search for specialty doctors of a certain type,
+                                // hence the reason I am then casting specialty from CharSequnce back to a string
+                                (CharSequence) s.getSpecialty().toString(), specialty
                         )).collect(Collectors.toList());
     }
 }

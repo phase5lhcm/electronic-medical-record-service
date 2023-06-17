@@ -2,4 +2,7 @@ type Query {
     allPatients: [Patient]
     onePatient: Patient
     specialtyDoctors(specialty: String): [SpecialtyDoctor]
+    patientsByPrimaryCareDoctor(name: String): [Patient] # name refers to name of PCP
+    onePrimaryCareDoctor: PrimaryCareDoctor
+    allPrimaryCareDoctors: [PrimaryCareDoctor]
 }
