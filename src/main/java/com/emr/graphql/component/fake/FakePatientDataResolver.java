@@ -8,6 +8,7 @@ import com.netflix.dgs.codegen.generated.types.PrimaryCareDoctor;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsData;
 import com.netflix.graphql.dgs.DgsQuery;
+import com.netflix.graphql.dgs.InputArgument;
 import graphql.schema.DataFetchingEnvironment;
 
 import java.util.List;
@@ -29,31 +30,32 @@ public class FakePatientDataResolver {
     }
 
     /**
-     * Get list of patients by PCP
+     * @param dataFetchingEnvironment = the name and email address for a primary care doctor
+     * @return list of patients per primary care doctor
      */
-
-    @DgsComponent
-    public class PatientsByPrimaryCareDoctorDatafetcher {
-        @DgsQuery(field = "patientsByPrimaryCareDoctor")
-                public List<Patient> getPatientsByPrimaryCareDoctor(
-                DataFetchingEnvironment dataFetchingEnvironment) {
-            var patientsToPrimaryCareDoctorMap = (Map<String, Object>) dataFetchingEnvironment.getArgument("patientsByPrimaryCareDoctorInput");
-            var patientsByPrimaryCareDoctorInput = PatientsByPrimaryCareDoctorFilter.newBuilder()
+    @DgsQuery(field = "patientsByPrimaryCareDoctorFilter")
+            public List<Patient> getPatientsByPrimaryCareDoctorFilter(
+            DataFetchingEnvironment dataFetchingEnvironment, @InputArgument PatientsByPrimaryCareDoctorFilter patientsByPrimaryCareDoctorFilter) {
+        var patientsToPrimaryCareDoctorMap = (Map<String, Object>) dataFetchingEnvironment.getArgument("patientsByPrimaryCareDoctorFilter");
+         patientsByPrimaryCareDoctorFilter = PatientsByPrimaryCareDoctorFilter.newBuilder()
                     .name((String) patientsToPrimaryCareDoctorMap.get(DgsConstants.PATIENTSBYPRIMARYCAREDOCTORFILTER.Name))
                     .emailAddress((String) patientsToPrimaryCareDoctorMap.get(
                             DgsConstants.PATIENTSBYPRIMARYCAREDOCTORFILTER.EmailAddress))
                     .build();
 
-            return FakePatientDAO.PATIENT_LIST.stream().filter(
-                    p -> this.matchPatientsToPrimaryCareDoctor(patientsByPrimaryCareDoctorInput, p.getPrimary())
+         /** TODO - test this again when I connect to a db so that my input data actually has something to verify against
+          * ok! so I think given that I am using fake data that isn't stored anywhere,
+         my input data has nothing to reference! Because I am getting a response if I negate my boolean!
+         i will try this again when I actually connect to a db but I'm going to move on for now.
+
+          **/
+        PatientsByPrimaryCareDoctorFilter finalPatientsByPrimaryCareDoctorFilter = patientsByPrimaryCareDoctorFilter;
+        return FakePatientDAO.PATIENT_LIST.stream().filter(
+                    p -> !this.matchPatientsToPrimaryCareDoctor(finalPatientsByPrimaryCareDoctorFilter, p.getPrimary())
             ).collect(Collectors.toList());
         }
         // let us add some validation to ensure that our patient input matches what we have stored
-        private boolean matchPatientsToPrimaryCareDoctor(PatientsByPrimaryCareDoctorFilter filter, PrimaryCareDoctor element)
-        {
+        private boolean matchPatientsToPrimaryCareDoctor(PatientsByPrimaryCareDoctorFilter filter, PrimaryCareDoctor element) {
             return filter.getName().equals(element.getName())
-                    && filter.getEmailAddress().equals(element.getEmailAddress());
-        }
-
+                    && filter.getEmailAddress().equals(element.getEmailAddress()); }
     }
-}

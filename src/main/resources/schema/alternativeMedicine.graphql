@@ -1,0 +1,6 @@
+type AlternativeMedicine {
+    service: [String]
+    description: String
+    patient: Patient
+}
+

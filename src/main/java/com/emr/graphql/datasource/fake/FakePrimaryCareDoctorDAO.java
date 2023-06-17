@@ -33,7 +33,9 @@ public class FakePrimaryCareDoctorDAO {
             }
             // TODO - come up with a better method for generating an email address
             var primaryCareDoctor = PrimaryCareDoctor.newBuilder().name(faker.name().fullName())
-                    .locations(addresses).emailAddress(faker.name().lastName() + "@mail.com").build();
+                    .locations(addresses)
+                    .emailAddress(faker.name().lastName() + "@mail.com")
+                    .build();
 
             PRIMARY_CARE_DOCTOR_LIST.add(primaryCareDoctor);
         }
