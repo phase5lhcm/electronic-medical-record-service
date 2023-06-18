@@ -7,4 +7,5 @@ type Query {
     allPrimaryCareDoctors: [PrimaryCareDoctor]
     patientsByPrimaryCareDoctorFilter(patientsByPrimaryCareDoctorFilter: PatientsByPrimaryCareDoctorFilter): [Patient]
     pharmacyByZipCode(pharmacyInput: PharmacyInput): [Pharmacy]
+    alternativeMedicine(alternativeMedicineFilter: AlternativeMedicineFilter): [AlternativeMedicine]
 }

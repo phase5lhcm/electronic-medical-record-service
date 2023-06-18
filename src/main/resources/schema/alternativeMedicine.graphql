@@ -4,3 +4,13 @@ type AlternativeMedicine {
     patient: Patient
 }
 
+input AlternativeMedicineFilter {
+    service: String
+    patient: PatientFilter
+}
+
+input PatientFilter {
+    name: String
+    medicalRecordNumber: Int
+}
+
