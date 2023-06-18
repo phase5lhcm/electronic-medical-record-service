@@ -1,4 +1,4 @@
-package com.emr.graphql.component.fake;
+package com.emr.graphql.component.resolvers;
 
 import com.emr.graphql.datasource.fake.FakePrimaryCareDoctorDAO;
 import com.netflix.dgs.codegen.generated.types.PrimaryCareDoctor;

@@ -22,7 +22,7 @@ public class FakeAlternativeMedicineDAO {
     private Faker faker;
 
     @PostConstruct
-    private void postConstruct throws MalformedURLException {
+    private void postConstruct() throws MalformedURLException {
         for (int i = 0; i < 5; i++) {
             var pcpLocations = new ArrayList<Address>();
             var patientAddress = Address.newBuilder().street(faker.address().streetAddress())

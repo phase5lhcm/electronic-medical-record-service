@@ -1,4 +1,4 @@
-package com.emr.graphql.component.fake;
+package com.emr.graphql.component.resolvers;
 
 import com.emr.graphql.datasource.fake.FakePatientDAO;
 import com.netflix.dgs.codegen.generated.DgsConstants;
@@ -6,7 +6,6 @@ import com.netflix.dgs.codegen.generated.types.Patient;
 import com.netflix.dgs.codegen.generated.types.PatientsByPrimaryCareDoctorFilter;
 import com.netflix.dgs.codegen.generated.types.PrimaryCareDoctor;
 import com.netflix.graphql.dgs.DgsComponent;
-import com.netflix.graphql.dgs.DgsData;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
 import graphql.schema.DataFetchingEnvironment;

@@ -1,15 +1,13 @@
-package com.emr.graphql.component.fake;
+package com.emr.graphql.component.resolvers;
 
 import com.emr.graphql.datasource.fake.FakeSpecialtyDoctorDataSource;
 import com.netflix.dgs.codegen.generated.types.SpecialtyDoctor;
 import com.netflix.graphql.dgs.DgsComponent;
-import com.netflix.graphql.dgs.DgsData;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @DgsComponent
