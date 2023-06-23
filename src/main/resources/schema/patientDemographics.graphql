@@ -5,6 +5,7 @@ type Patient {
     gender: String
     contactNumber: String
     primary: PrimaryCareDoctor
+    DOB: String
     preferredPharmacy: Pharmacy
 }
 

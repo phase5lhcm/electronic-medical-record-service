@@ -8,6 +8,7 @@ import net.datafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -22,6 +23,7 @@ public class FakePatientDAO {
     @PostConstruct
     private void postConstruct() {
         for (int i = 0; i < 5; i++){
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
             var pcpLocations =  new ArrayList<Address>();
             var patientAddress = Address.newBuilder().street(faker.address().streetAddress())
                         .city(faker.address().cityName()).state(faker.address().stateAbbr())
@@ -42,6 +44,7 @@ public class FakePatientDAO {
                     .address(patientAddress).gender(faker.gender().binaryTypes())
                     .contactNumber(String.valueOf(faker.phoneNumber().phoneNumber()))
                     .primary(pcp)
+                    .DOB(sdf.format(faker.date().birthday()))
                     .build();
 
             PATIENT_LIST.add(patient);
