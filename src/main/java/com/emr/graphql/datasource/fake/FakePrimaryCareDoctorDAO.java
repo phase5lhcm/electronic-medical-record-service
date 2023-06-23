@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 
@@ -33,6 +34,7 @@ public class FakePrimaryCareDoctorDAO {
             }
             // TODO - come up with a better method for generating an email address
             var primaryCareDoctor = PrimaryCareDoctor.newBuilder().name(faker.name().fullName())
+                    .id(UUID.randomUUID().toString())
                     .locations(addresses)
                     .emailAddress(faker.name().lastName() + "@mail.com")
                     .build();

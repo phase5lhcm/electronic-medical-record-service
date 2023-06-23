@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Configuration
@@ -40,6 +41,7 @@ public class FakePatientDAO {
                     .locations(pcpLocations).emailAddress(faker.name().lastName() + "@mail.com")
                     .build();
             var patient = Patient.newBuilder().name(faker.name().fullName())
+                    .patientID(UUID.randomUUID().toString())
                     .medicalRecordNumber(faker.random().nextInt(2000))
                     .address(patientAddress).gender(faker.gender().binaryTypes())
                     .contactNumber(String.valueOf(faker.phoneNumber().phoneNumber()))

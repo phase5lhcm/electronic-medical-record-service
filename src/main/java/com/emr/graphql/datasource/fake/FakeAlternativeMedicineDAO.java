@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Configuration
@@ -44,6 +45,7 @@ public class FakeAlternativeMedicineDAO {
                         .emailAddress(faker.name().lastName() + "@mail.com")
                         .build();
                 var patient = Patient.newBuilder().name(faker.name().fullName())
+                        .patientID(UUID.randomUUID().toString())
                         .medicalRecordNumber(faker.random().nextInt(3000))
                         .address(patientAddress)
                         .gender(String.valueOf(faker.gender()))

@@ -1,15 +1,17 @@
 type Patient {
+    patientID: ID
     name: String
     medicalRecordNumber: Int
+    DOB: String
     address: Address
     gender: String
     contactNumber: String
     primary: PrimaryCareDoctor
-    DOB: String
     preferredPharmacy: Pharmacy
 }
 
 type PrimaryCareDoctor {
+    id: ID!
     name: String
     locations: [Address!]!
     emailAddress: String
@@ -22,6 +24,7 @@ input PatientsByPrimaryCareDoctorFilter {
 }
 
 type SpecialtyDoctor {
+    id: ID!
     name: String!
     specialty: Specialty!
     contactNumber: String!
@@ -39,6 +42,7 @@ type Address {
 }
 
 type Pharmacy {
+    id: ID!
     name: String!
     contactNumber: String!
     zipCode: String

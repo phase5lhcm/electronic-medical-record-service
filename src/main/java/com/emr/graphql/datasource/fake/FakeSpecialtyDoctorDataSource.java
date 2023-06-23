@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Configuration
 public class FakeSpecialtyDoctorDataSource {
@@ -23,6 +24,7 @@ public class FakeSpecialtyDoctorDataSource {
         for (int i = 0; i < 4; i++) {
             var specialty = Specialty.newBuilder().specialty(String.valueOf(faker.science().element())).build();
             var specialtyDoctor = SpecialtyDoctor.newBuilder().name(faker.name().fullName())
+                    .id(UUID.randomUUID().toString())
                     .specialty(specialty)
                     .contactNumber(String.valueOf(faker.phoneNumber().phoneNumber()))
                     .build();

@@ -17,15 +17,14 @@ import java.util.stream.Collectors;
 public class FakeAlternativeMedicineDataResolver {
 
     @DgsQuery(field = "alternativeMedicine")
-    public List<AlternativeMedicine> getAlternativeMedicine(@InputArgument(name = "alternativeMedicineFilter", collectionType = AlternativeMedicineFilter.class)
-                       Optional<AlternativeMedicineFilter> filter) {
-        if (filter.isEmpty()) {
-            System.out.println("filter is empty" + filter);
+    public List<AlternativeMedicine> getAlternativeMedicine(@InputArgument AlternativeMedicineFilter alternativeMedicineFilter) {
+        if (alternativeMedicineFilter == null) {
             return FakeAlternativeMedicineDAO.ALTERNATIVE_MEDICINE_LIST;
         }
-        System.out.println("filter is full" + filter);
+        System.out.println("your filter contains" + alternativeMedicineFilter);
+
         return FakeAlternativeMedicineDAO.ALTERNATIVE_MEDICINE_LIST.stream().filter(
-                alternativeMedicine -> this.matchAlternativeMedicineFilter(filter.get(), alternativeMedicine)
+                alternativeMedicine -> this.matchAlternativeMedicineFilter(alternativeMedicineFilter, alternativeMedicine)
         ).collect(Collectors.toList());
     }
     private boolean matchAlternativeMedicineFilter(@NotNull AlternativeMedicineFilter filter, AlternativeMedicine alternativeMedicine){
