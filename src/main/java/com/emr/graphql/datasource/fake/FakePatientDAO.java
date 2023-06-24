@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -47,6 +48,7 @@ public class FakePatientDAO {
                     .contactNumber(String.valueOf(faker.phoneNumber().phoneNumber()))
                     .primary(pcp)
                     .DOB(sdf.format(faker.date().birthday()))
+                    .dateProfileCreated(LocalDate.now())
                     .build();
 
             PATIENT_LIST.add(patient);

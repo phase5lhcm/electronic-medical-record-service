@@ -8,6 +8,7 @@ type Patient {
     contactNumber: String
     primary: PrimaryCareDoctor
     preferredPharmacy: Pharmacy
+    dateProfileCreated: Date
 }
 
 type PrimaryCareDoctor {
@@ -46,6 +47,7 @@ type Pharmacy {
     name: String!
     contactNumber: String!
     zipCode: String
+    pharmacyWebsite: Url
 }
 
 input PharmacyInput {
