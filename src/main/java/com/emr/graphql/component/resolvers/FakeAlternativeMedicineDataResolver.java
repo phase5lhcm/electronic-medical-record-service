@@ -1,36 +1,57 @@
 package com.emr.graphql.component.resolvers;
 
 import com.emr.graphql.datasource.fake.FakeAlternativeMedicineDAO;
+import com.netflix.dgs.codegen.generated.DgsConstants;
 import com.netflix.dgs.codegen.generated.types.AlternativeMedicine;
 import com.netflix.dgs.codegen.generated.types.AlternativeMedicineFilter;
+import com.netflix.dgs.codegen.generated.types.Patient;
+import com.netflix.dgs.codegen.generated.types.PatientFilter;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
+import graphql.schema.DataFetchingEnvironment;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @DgsComponent
 public class FakeAlternativeMedicineDataResolver {
 
+//    @DgsQuery(field = "alternativeMedicine")
+//    public List<AlternativeMedicine> getAlternativeMedicine(@InputArgument AlternativeMedicineFilter alternativeMedicineFilter) {
+//        if (alternativeMedicineFilter == null) {
+//           // System.out.println("filter is empty");
+//            return FakeAlternativeMedicineDAO.ALTERNATIVE_MEDICINE_LIST;
+//        }
+//      //  System.out.println("filter is full " + alternativeMedicineFilter);
+//
+//        return FakeAlternativeMedicineDAO.ALTERNATIVE_MEDICINE_LIST.stream().filter(
+//                alternativeMedicine -> this.matchAlternativeMedicineFilter(alternativeMedicineFilter, alternativeMedicine)
+//        ).collect(Collectors.toList());
+//    }
+
+    // TODO - revisit how  I am getting a valid return when I connect to the db so that I can verify my input data against actual data
     @DgsQuery(field = "alternativeMedicine")
     public List<AlternativeMedicine> getAlternativeMedicine(@InputArgument AlternativeMedicineFilter alternativeMedicineFilter) {
-        if (alternativeMedicineFilter == null) {
+        if (alternativeMedicineFilter.getPatient() == null) {
+            // System.out.println("filter is empty");
             return FakeAlternativeMedicineDAO.ALTERNATIVE_MEDICINE_LIST;
         }
-        System.out.println("your filter contains" + alternativeMedicineFilter);
+        //  System.out.println("filter is full " + alternativeMedicineFilter);
 
         return FakeAlternativeMedicineDAO.ALTERNATIVE_MEDICINE_LIST.stream().filter(
-                alternativeMedicine -> this.matchAlternativeMedicineFilter(alternativeMedicineFilter, alternativeMedicine)
+                alternativeMedicine -> StringUtils.containsIgnoreCase(alternativeMedicine.getService().toString(), alternativeMedicineFilter.getService())
+                        || alternativeMedicineFilter.getPatient().getMedicalRecordNumber().equals(alternativeMedicine.getPatient().getMedicalRecordNumber())
         ).collect(Collectors.toList());
     }
-    private boolean matchAlternativeMedicineFilter(@NotNull AlternativeMedicineFilter filter, AlternativeMedicine alternativeMedicine){
+    private boolean matchAlternativeMedicineFilter(AlternativeMedicineFilter filter, AlternativeMedicine alternativeMedicine){
         // 1 check if service matches with service we have on record
-        var isServiceMatch = StringUtils.containsIgnoreCase(alternativeMedicine.getService().toString(),
-                StringUtils.defaultIfBlank(filter.getService(), StringUtils.EMPTY));
+        var isServiceMatch = StringUtils.containsIgnoreCase(filter.getService(),
+                StringUtils.defaultIfBlank(alternativeMedicine.getService().toString(), StringUtils.EMPTY));
         if(!isServiceMatch){
             return false;
         }
@@ -45,10 +66,10 @@ public class FakeAlternativeMedicineDataResolver {
 //            return false;
 //        }
         //  var isPatientMrnMatch = filter.getPatient().getMedicalRecordNumber().equals(alternativeMedicine.getPatient().getMedicalRecordNumber());
-        var isPatientNameMatch = filter.getPatient() != null && !StringUtils.containsIgnoreCase(alternativeMedicine.getPatient().getName(),
-                StringUtils.defaultIfBlank(filter.getPatient().getName(), StringUtils.EMPTY)
+        var isPatientNameMatch = filter.getPatient() != null && StringUtils.containsIgnoreCase(filter.getPatient().getName(),
+                StringUtils.defaultIfBlank(alternativeMedicine.getPatient().getName(), StringUtils.EMPTY)
         );
-        if(isPatientNameMatch){
+        if(!isPatientNameMatch){
             return false;
         }
         return true;
