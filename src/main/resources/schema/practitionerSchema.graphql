@@ -1,0 +1,47 @@
+enum PractitionerSpecialtyType{
+    CARDIOLOGY, SURGERY, ONCOLOGY, CHRIPRAXY, HOMEOPATHY, OSTEOPATHY, ACCUPUNCTURE
+}
+
+interface Practitioner {
+    practitionerName: String!
+    practitionerSpecialtyType: PractitionerSpecialtyType
+    practitionerEmailAddress: String!
+    practitionerPhoneNumber: String!
+    practiceLocation: Address
+    practiceWebsite: Url
+}
+
+type Attending implements Practitioner {
+    practitionerName: String!
+    practitionerSpecialtyType: PractitionerSpecialtyType
+    practitionerEmailAddress: String!
+    practitionerPhoneNumber: String!
+    practiceLocation: Address
+    practiceWebsite: Url
+    university: String
+}
+
+type NursePractitioner implements Practitioner {
+    practitionerName: String!
+    practitionerSpecialtyType: PractitionerSpecialtyType
+    practitionerEmailAddress: String!
+    practitionerPhoneNumber: String!
+    practiceLocation: Address
+    practiceWebsite: Url
+    degreeType: String
+}
+
+type PhysicianAssistant implements Practitioner {
+    practitionerName: String!
+    practitionerSpecialtyType: PractitionerSpecialtyType
+    practitionerEmailAddress: String!
+    practitionerPhoneNumber: String!
+    practiceLocation: Address
+    practiceWebsite: Url
+    university: String
+    certification: String
+}
+
+input PractitionerFilter {
+    practitionerSpecialtyType: String
+}

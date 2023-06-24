@@ -12,4 +12,5 @@ type Query {
     patientsByPrimaryCareDoctorFilter(patientsByPrimaryCareDoctorFilter: PatientsByPrimaryCareDoctorFilter): [Patient]
     pharmacyByZipCode(pharmacyInput: PharmacyInput): [Pharmacy]
     alternativeMedicine(alternativeMedicineFilter: AlternativeMedicineFilter): [AlternativeMedicine]
+    practitioners(practitionerFilter: PractitionerFilter): [Practitioner]
 }
