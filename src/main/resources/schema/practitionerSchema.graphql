@@ -4,7 +4,7 @@ enum PractitionerSpecialtyType{
 
 interface Practitioner {
     practitionerName: String!
-    practitionerSpecialtyType: PractitionerSpecialtyType
+    practitionerSpecialtyType: String!
     practitionerEmailAddress: String!
     practitionerPhoneNumber: String!
     practiceLocation: Address
@@ -13,7 +13,7 @@ interface Practitioner {
 
 type Attending implements Practitioner {
     practitionerName: String!
-    practitionerSpecialtyType: PractitionerSpecialtyType
+    practitionerSpecialtyType: String!
     practitionerEmailAddress: String!
     practitionerPhoneNumber: String!
     practiceLocation: Address
@@ -23,7 +23,7 @@ type Attending implements Practitioner {
 
 type NursePractitioner implements Practitioner {
     practitionerName: String!
-    practitionerSpecialtyType: PractitionerSpecialtyType
+    practitionerSpecialtyType: String!
     practitionerEmailAddress: String!
     practitionerPhoneNumber: String!
     practiceLocation: Address
@@ -33,7 +33,7 @@ type NursePractitioner implements Practitioner {
 
 type PhysicianAssistant implements Practitioner {
     practitionerName: String!
-    practitionerSpecialtyType: PractitionerSpecialtyType
+    practitionerSpecialtyType: String!
     practitionerEmailAddress: String!
     practitionerPhoneNumber: String!
     practiceLocation: Address

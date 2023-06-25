@@ -17,8 +17,9 @@ public class FakePractitionerDAO {
 
     public static final List<Practitioner> PRACTITIONER_LIST = new ArrayList<>();
 
-    @Autowired
     private Faker faker;
+    @Autowired
+    public FakePractitionerDAO(Faker faker) {this.faker = faker;}
 
     @PostConstruct
     private void postConstruct() throws MalformedURLException {
@@ -29,23 +30,23 @@ public class FakePractitionerDAO {
                     .state(faker.address().stateAbbr())
                     .zipCode(faker.address().zipCode())
                     .build();
-            Practitioner practitioner = switch (1 % 3){
+            Practitioner practitioner = switch (i % 4){
                 case 0:
                     yield NursePractitioner.newBuilder()
-                            .practitionerName(faker.name().fullName())
-                            .practitionerSpecialtyType(PractitionerSpecialtyType.CARDIOLOGY)
+                            .practitionerName(faker.name().fullName() + " ,NP")
+                            .practitionerSpecialtyType(randomSpecialtyGenerator())
                             .practitionerEmailAddress(faker.internet().emailAddress())
-                            .practitionerPhoneNumber(String.valueOf(faker.phoneNumber()))
+                            .practitionerPhoneNumber(String.valueOf(faker.phoneNumber().phoneNumber()))
                             .practiceLocation(address)
                             .practiceWebsite(new URL("https://" + faker.internet().url()))
                             .degreeType(randomDegreeGenerator())
                             .build();
                 case 1:
                     yield PhysicianAssistant.newBuilder()
-                            .practitionerName(faker.name().fullName())
-                            .practitionerSpecialtyType(PractitionerSpecialtyType.HOMEOPATHY)
+                            .practitionerName(faker.name().fullName() + " ,PA")
+                            .practitionerSpecialtyType(randomSpecialtyGenerator())
                             .practitionerEmailAddress(faker.internet().emailAddress())
-                            .practitionerPhoneNumber(String.valueOf(faker.phoneNumber()))
+                            .practitionerPhoneNumber(String.valueOf(faker.phoneNumber().phoneNumber()))
                             .practiceLocation(address)
                             .practiceWebsite(new URL("https://" + faker.internet().url()))
                             .university(faker.educator().university())
@@ -53,10 +54,10 @@ public class FakePractitionerDAO {
                             .build();
                 default:
                     yield Attending.newBuilder()
-                            .practitionerName(faker.name().fullName())
-                            .practitionerSpecialtyType(PractitionerSpecialtyType.ONCOLOGY)
+                            .practitionerName(faker.name().fullName() + " ,MD")
+                            .practitionerSpecialtyType(randomSpecialtyGenerator())
                             .practitionerEmailAddress(faker.internet().emailAddress())
-                            .practitionerPhoneNumber(String.valueOf(faker.phoneNumber()))
+                            .practitionerPhoneNumber(String.valueOf(faker.phoneNumber().phoneNumber()))
                             .practiceLocation(address)
                             .practiceWebsite(new URL("https://" + faker.internet().url()))
                             .university(faker.educator().university())
@@ -69,9 +70,7 @@ public class FakePractitionerDAO {
     private String randomDegreeGenerator() {
         switch (ThreadLocalRandom.current().nextInt(6) % 3) {
             case 0:
-                return new String("BSN");
-            case 1:
-                return new String("RN");
+                return new String("DNP");
             default:
                 return new String("MSN");
         }
@@ -79,12 +78,20 @@ public class FakePractitionerDAO {
 
     // TODO - use enum values to generate random enums for each type of practitioner
     private String randomSpecialtyGenerator(){
-        switch (ThreadLocalRandom.current().nextInt(14) % 2){
+        switch (ThreadLocalRandom.current().nextInt(6) % 3){
             case 0:
-                return String.valueOf(PractitionerSpecialtyType.ONCOLOGY)
+                return String.valueOf(PractitionerSpecialtyType.ONCOLOGY);
             case 1:
-                return new String("RN");
+                return String.valueOf(PractitionerSpecialtyType.ACCUPUNCTURE);
+            case 2:
+                return String.valueOf(PractitionerSpecialtyType.HOMEOPATHY);
+            case 3:
+                return String.valueOf(PractitionerSpecialtyType.CHRIPRAXY);
+            case 4:
+                return String.valueOf(PractitionerSpecialtyType.CARDIOLOGY);
+            case 5:
+                return String.valueOf(PractitionerSpecialtyType.OSTEOPATHY);
             default:
-                return new String("MSN");
+                return String.valueOf(PractitionerSpecialtyType.SURGERY);
         }
     }}
