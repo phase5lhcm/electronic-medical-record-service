@@ -15,6 +15,7 @@ import java.util.UUID;
 public class FakeSpecialtyDoctorDataSource {
     private Faker faker;
     public static final List<SpecialtyDoctor> SPECIALTY_DOCTOR_LIST = new ArrayList<>();
+    @Autowired
     public FakeSpecialtyDoctorDataSource(Faker faker) {
         this.faker = faker;
     }

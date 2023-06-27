@@ -76,7 +76,6 @@ public class FakePractitionerDAO {
         }
     }
 
-    // TODO - use enum values to generate random enums for each type of practitioner
     private String randomSpecialtyGenerator(){
         switch (ThreadLocalRandom.current().nextInt(6) % 3){
             case 0:
