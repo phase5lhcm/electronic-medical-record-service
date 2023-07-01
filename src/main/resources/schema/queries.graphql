@@ -26,3 +26,7 @@ type Mutation {
     patientDeactivate(patient: PatientDeactivateInput!): PatientDeactivateResponse!
     messageCreate(message: MessageCreateInput): MessageResponse
 }
+
+type Subscription {
+    messageAdded: Message!
+}

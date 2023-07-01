@@ -16,6 +16,17 @@ type Message implements SearchableMessage {
     messageResponse: [MessageResponse!]
 }
 
+#only messages sent to office assistants can receive a solution
+# a solution represents a response to a message that a patient sends to the office
+type Solution implements SearchableMessage {
+    id: ID!
+    createdDateTime: DateTime!
+    prettyCreateDateTime: String
+    title: String!
+    content: String!
+    author: OfficeAssistant!
+}
+
 type MessageResponse {
     message: Message
 }
