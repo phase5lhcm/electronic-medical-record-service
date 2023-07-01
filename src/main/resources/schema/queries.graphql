@@ -1,6 +1,7 @@
 scalar Url
 scalar Date
 scalar NonNegativeInt
+scalar DateTime
 
 type Query {
     allPatients: [Patient]

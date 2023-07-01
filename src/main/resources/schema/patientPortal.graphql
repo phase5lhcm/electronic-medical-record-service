@@ -4,10 +4,27 @@ type OfficeAssistant {
     email: String!
 }
 
-type Message {
-
+type Message implements SearchableMessage{
+    id: ID!
+    createdDateTime: DateTime!
+    prettyCreateDateTime: String
+    title: String!
+    message: String!
 }
 
-type Solution {
+type MessageResponse implements SearchableMessage{
+    id: ID!
+    createdDateTime: DateTime!
+    prettyCreateDateTime: String
+    messageResponse: String!
+}
 
+interface SearchableMessage {
+    id: ID!
+    createdDateTime: DateTime!
+    prettyCreateDateTime: String
+}
+
+input MessageSearchFilter {
+    keyword: String
 }
