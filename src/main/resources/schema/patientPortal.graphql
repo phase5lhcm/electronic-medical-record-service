@@ -16,14 +16,8 @@ type Message implements SearchableMessage {
     messageResponse: [MessageResponse!]
 }
 
-type MessageResponse implements SearchableMessage {
-    id: ID!
-    createdDateTime: DateTime!
-    prettyCreateDateTime: String
-    title: String!
-    message: String!
-    officeSender: OfficeAssistant
-    patient: Patient
+type MessageResponse {
+    message: Message
 }
 
 interface SearchableMessage {
@@ -35,3 +29,15 @@ interface SearchableMessage {
 input MessageSearchFilter {
     keyword: String
 }
+
+input MessageCreateInput {
+    title: String!
+    content: String!
+}
+
+input MessageResponseInput {
+    messageID: ID!
+    content: String!
+}
+
+

@@ -15,8 +15,14 @@ type Query {
     alternativeMedicine(alternativeMedicineFilter: AlternativeMedicineFilter): [AlternativeMedicine]
     practitioners(practitionerFilter: PractitionerFilter): [Practitioner]
     officeAssistant: OfficeAssistant!
-    messagesToPatient: [MessageToPatient!]
-    messagesFromPatient: [PatientMessage!]
+    messageList: [Message!]
     messageSearch(filter: MessageSearchFilter): SearchableMessage
+    messageById(id: ID!): Message!
+}
 
+type Mutation {
+    patientCreate(patient: PatientCreateInput!): PatientResponse!
+    patientLogin(patient: PatientLoginInput!): PatientResponse!
+    patientDeactivate(patient: PatientDeactivateInput!): PatientDeactivateResponse!
+    messageCreate(message: MessageCreateInput): MessageResponse
 }

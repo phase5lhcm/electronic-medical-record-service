@@ -1,6 +1,7 @@
 type Patient {
     patientID: ID
     name: String
+    email: String
     medicalRecordNumber: Int
     DOB: String
     address: Address
@@ -55,4 +56,45 @@ type Pharmacy {
 
 input PharmacyInput {
     zipCode: String
+}
+
+input PatientCreateInput {
+    name: String
+    DOB: String
+    email: String
+    address: String!
+    gender: String
+    contactNumber: String
+    primary: String
+    preferredPharmacy: String
+    password: String
+}
+
+input PatientLoginInput {
+    name: String
+    email: String
+    password: String
+
+}
+
+input PatientDeactivateInput {
+    patientMRN: Int!
+    name: String
+    isActive: Boolean!
+}
+
+type UserAuthToken {
+    authToken: String
+    expiryTime: String
+}
+
+## for patient create/login
+type PatientResponse {
+    patient: Patient
+    authToken: UserAuthToken
+}
+
+type PatientDeactivateResponse {
+    isActive: Boolean
+
 }
