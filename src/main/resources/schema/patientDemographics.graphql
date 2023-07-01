@@ -9,7 +9,7 @@ type Patient {
     contactNumber: String
     primary: PrimaryCareDoctor
     preferredPharmacy: Pharmacy
-    message: [Message!]
+    message: [Enquiry!]
     messageCreatedDateTime: DateTime!
     prettyCreateDateTime: String
     dateProfileCreated: Date

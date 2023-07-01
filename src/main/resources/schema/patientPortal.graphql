@@ -37,10 +37,6 @@ interface SearchableMessage {
     prettyCreateDateTime: String
 }
 
-input MessageSearchFilter {
-    keyword: String
-}
-
 input MessageCreateInput {
     title: String!
     content: String!

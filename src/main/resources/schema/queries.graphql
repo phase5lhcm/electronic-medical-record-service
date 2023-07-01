@@ -15,18 +15,19 @@ type Query {
     alternativeMedicine(alternativeMedicineFilter: AlternativeMedicineFilter): [AlternativeMedicine]
     practitioners(practitionerFilter: PractitionerFilter): [Practitioner]
     officeAssistant: OfficeAssistant!
-    messageList: [Message!]
-    messageSearch(filter: MessageSearchFilter): SearchableMessage
-    messageById(id: ID!): Message!
+    enquiryList: [Enquiry!]
+    messageSearch(filter: MessageSearchFilter): [Searchable]
+    enquiryDetail(id: ID!): Enquiry!
 }
 
 type Mutation {
     patientCreate(patient: PatientCreateInput!): PatientResponse!
     patientLogin(patient: PatientLoginInput!): PatientResponse!
     patientDeactivate(patient: PatientDeactivateInput!): PatientDeactivateResponse!
-    messageCreate(message: MessageCreateInput): MessageResponse
+    enquiryCreate(enquiry: EnquiryCreateInput): EnquiryResponse
+    solutionCreate(solution: SolutionCreateInput): SolutionResponse
 }
 
 type Subscription {
-    messageAdded: Message!
+    enquirySent: Enquiry!
 }
