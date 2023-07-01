@@ -14,4 +14,9 @@ type Query {
     pharmacyByZipCode(pharmacyInput: PharmacyInput): [Pharmacy]
     alternativeMedicine(alternativeMedicineFilter: AlternativeMedicineFilter): [AlternativeMedicine]
     practitioners(practitionerFilter: PractitionerFilter): [Practitioner]
+    officeAssistant: OfficeAssistant!
+    messagesToPatient: [MessageToPatient!]
+    messagesFromPatient: [PatientMessage!]
+    messageSearch(filter: MessageSearchFilter): SearchableMessage
+
 }

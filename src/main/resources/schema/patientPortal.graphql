@@ -2,21 +2,28 @@ type OfficeAssistant {
     id: ID!
     name: String!
     email: String!
+    messages: [Message!]
 }
 
-type Message implements SearchableMessage{
+type Message implements SearchableMessage {
     id: ID!
     createdDateTime: DateTime!
     prettyCreateDateTime: String
     title: String!
     message: String!
+    officeSender: OfficeAssistant
+    patient: Patient
+    messageResponse: [MessageResponse!]
 }
 
-type MessageResponse implements SearchableMessage{
+type MessageResponse implements SearchableMessage {
     id: ID!
     createdDateTime: DateTime!
     prettyCreateDateTime: String
-    messageResponse: String!
+    title: String!
+    message: String!
+    officeSender: OfficeAssistant
+    patient: Patient
 }
 
 interface SearchableMessage {
