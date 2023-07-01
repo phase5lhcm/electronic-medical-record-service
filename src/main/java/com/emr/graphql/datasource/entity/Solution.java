@@ -2,27 +2,21 @@ package com.emr.graphql.datasource.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "message")
-public class Message {
+@Table(name = "solution")
+public class Solution {
+
     @Id
     private UUID id;
     @CreationTimestamp
     private LocalDateTime createdDateTime;
     private String title;
-    private String content;
-
-
-    @OneToMany
-    private Patient patient;
 
     public UUID getId() {
         return id;
@@ -48,11 +42,13 @@ public class Message {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
+    public String getMessage() {
+        return message;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setMessage(String message) {
+        this.message = message;
     }
+
+    private String message;
 }
