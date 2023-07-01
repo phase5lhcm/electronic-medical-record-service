@@ -1,0 +1,13 @@
+type OfficeAssistant {
+    id: ID!
+    name: String!
+    email: String!
+}
+
+type Message {
+
+}
+
+type Solution {
+
+}
