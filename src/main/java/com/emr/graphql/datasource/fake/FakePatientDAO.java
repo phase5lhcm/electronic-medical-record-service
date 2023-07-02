@@ -17,8 +17,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @Configuration
 public class FakePatientDAO {
-    @Autowired
     private Faker faker;
+    @Autowired
+    public FakePatientDAO(Faker faker) {this.faker = faker;}
 
     public static final List<Patient> PATIENT_LIST = new ArrayList<>();
 

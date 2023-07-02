@@ -1,0 +1,64 @@
+type OfficeAssistant {
+    id: ID!
+    username: String!
+    email: String!
+}
+
+#a message sent to the office from a patient
+type Enquiry implements Searchable{
+    id: ID!
+    createdDateTime: DateTime!
+    prettyCreateDateTime: String
+    title: String!
+    message: String!
+    patient: Patient
+    enquiryResponseCount: NonNegativeInt!
+    enquiryResponses: [Solution!]
+    messageResponse: [EnquiryResponse!]
+}
+
+#a message sent to the patient from the office
+type Solution implements Searchable{
+    id: ID!
+    createdDateTime: DateTime!
+    prettyCreateDateTime: String
+    title: String!
+    message: String!
+    enquiry: Enquiry!
+    officeAssistant: OfficeAssistant!
+
+}
+
+interface Searchable {
+    id: ID!
+    createdDateTime: DateTime!
+    prettyCreateDateTime: String
+    title: String!
+}
+
+input MessageSearchFilter {
+    keyword: String
+}
+
+input EnquiryCreateInput {
+    title: String!
+    content: String!
+}
+
+#the office assistant must identify the response to the enquiry
+# by using the enquiry id and title
+input SolutionCreateInput {
+    content: String!
+    enquiryId: ID!
+    enquiryTitle: String!
+}
+
+#a response generated when an enquiry is created
+type EnquiryResponse {
+    enquiry: Enquiry
+}
+
+#a response generated when a solution is created
+type SolutionResponse {
+    solution: Solution
+}

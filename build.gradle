@@ -23,10 +23,15 @@ dependencies {
 
 	implementation group: 'com.netflix.graphql.dgs', name: 'graphql-dgs', version: '7.2.0'
 	runtimeOnly group: 'com.netflix.graphql.dgs', name: 'graphql-dgs-spring-boot-starter', version: '7.2.0'
+	// https://mvnrepository.com/artifact/org.postgresql/postgresql
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
 	// https://mvnrepository.com/artifact/com.netflix.graphql.dgs/graphql-dgs-extended-scalars
 	implementation group: 'com.netflix.graphql.dgs', name: 'graphql-dgs-extended-scalars', version: '7.2.0'
 	implementation 'net.datafaker:datafaker:1.9.0'
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '3.1.1'
+
 }
 
 tasks.named('test') {
@@ -35,9 +40,10 @@ tasks.named('test') {
 
 generateJava{
 	generateClient = true
-	typeMapping = ["Date": "java.time.LocalDate",
-					"NonnegativeInt": "java.lang.Integer",
-					"Url": 'java.net.URL']
+	typeMapping = ["Date"			: "java.time.LocalDate",
+					"NonNegativeInt": "java.lang.Integer",
+					"Url"			: 'java.net.URL',
+					"DateTime"		: "java.time.OffsetDateTime"]
 }
 
 

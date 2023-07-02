@@ -1,6 +1,7 @@
 scalar Url
 scalar Date
 scalar NonNegativeInt
+scalar DateTime
 
 type Query {
     allPatients: [Patient]
@@ -13,4 +14,20 @@ type Query {
     pharmacyByZipCode(pharmacyInput: PharmacyInput): [Pharmacy]
     alternativeMedicine(alternativeMedicineFilter: AlternativeMedicineFilter): [AlternativeMedicine]
     practitioners(practitionerFilter: PractitionerFilter): [Practitioner]
+    officeAssistant: OfficeAssistant!
+    enquiryList: [Enquiry!]
+    messageSearch(filter: MessageSearchFilter): [Searchable]
+    enquiryDetail(id: ID!): Enquiry!
+}
+
+type Mutation {
+    patientCreate(patient: PatientCreateInput!): PatientResponse!
+    patientLogin(patient: PatientLoginInput!): PatientResponse!
+    patientDeactivate(patient: PatientDeactivateInput!): PatientDeactivateResponse!
+    enquiryCreate(enquiry: EnquiryCreateInput): EnquiryResponse
+    solutionCreate(solution: SolutionCreateInput): SolutionResponse
+}
+
+type Subscription {
+    enquirySent: Enquiry!
 }

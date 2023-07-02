@@ -1,1 +1,10 @@
-
+spring:
+  main:
+    banner-mode: console
+  datasource:
+    url: jdbc:postgresql://localhost:5432/emr
+    username: christinemaynard
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false

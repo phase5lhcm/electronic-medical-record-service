@@ -1,1 +1,13 @@
-{"data":{"practitioners":[{"__typename":"PhysicianAssistant","practitionerName":"Prince Davis ,PA","practitionerSpecialtyType":"HOMEOPATHY","practitionerEmailAddress":"marco.sauer@gmail.com","practitionerPhoneNumber":"(940) 551-7907","practiceLocation":{"street":"008 Torp Loop","city":"Perryview","zipCode":"27206","state":"KY"},"practiceWebsite":"https://www.eun-stark.biz","university":"Vertapple Technical College","certification":"Homeopathic Services"},{"__typename":"Attending","practitionerName":"Avis Wolff ,MD","practitionerSpecialtyType":"HOMEOPATHY","practitionerEmailAddress":"vincent.deckow@hotmail.com","practitionerPhoneNumber":"(605) 507-9690 x6209","practiceLocation":{"street":"1594 Mariana Heights","city":"Maryettachester","zipCode":"60103","state":"MO"},"practiceWebsite":"https://www.carmella-labadie.io","university":"Flowerlake College"}]}}
+{"data":{"practitioners"
+:[{"__typename":"PhysicianAssistant",
+  "practitionerName":"Prince Davis ,PA",
+  "practitionerSpecialtyType":"HOMEOPATHY",
+  "practitionerEmailAddress":"marco.sauer@gmail.com",
+  "practitionerPhoneNumber":"(940) 551-7907",
+  "practiceLocation":{"street":"008 Torp Loop",
+    "city":"Perryview",
+    "zipCode":"27206",
+    "state":"KY"},
+  "practiceWebsite":"https://www.eun-stark.biz",
+  "university":"Vertapple Technical College",
+  "certification":"Homeopathic Services"},{"__typename":"Attending","practitionerName":"Avis Wolff ,MD","practitionerSpecialtyType":"HOMEOPATHY","practitionerEmailAddress":"vincent.deckow@hotmail.com","practitionerPhoneNumber":"(605) 507-9690 x6209","practiceLocation":{"street":"1594 Mariana Heights","city":"Maryettachester","zipCode":"60103","state":"MO"},"practiceWebsite":"https://www.carmella-labadie.io","university":"Flowerlake College"}]}}

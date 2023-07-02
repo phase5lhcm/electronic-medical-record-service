@@ -1,0 +1,61 @@
+CREATE TABLE patient (
+    patientId UUID NOT NULL,
+    patient_name varchar(100) NOT NULL,
+    medical_record_number INT NOT NULL,
+    DOB varchar(10) NOT NULL,
+    address text NOT NULL,
+    gender varchar(10),
+    email varchar NOT NULL,
+    contactNumber varchar(12) NOT NULL,
+    primary_care_doctor varchar,
+    preferred_pharmacy varchar,
+    hashed_password varchar(255) NOT NULL,
+    creation_timestamp timestamp NOT NULL,
+    UNIQUE (email),
+    UNIQUE (medical_record_number),
+    PRIMARY KEY (medical_record_number)
+
+);
+
+insert into patient (patientId, patient_name, medical_record_number,DOB, address, gender, email,
+                     contactNumber, primary_care_doctor, preferred_pharmacy, hashed_password, creation_timestamp)
+values ('6b3b8617-fbbf-4c91-b83d-f1a42d621c3e', 'Mercy Olson', '1213', '07/02/1969',
+        '{ "street":"642 Heriberto Crossroad",
+          "city":"Kassulkeview",
+          "zipCode":"39270",
+          "state":"ID"}', 'F', 'Murazik@mail.com', '610 240-7082','Dr.Al Pacino', 'Katz Drugs', '$2y$10$LC6wXDfzQi7DaTTDZFLQbejiWw8.kwiIaKfBVZs50SnWRRZMsM7M6',
+        '2023-01-23T10:54:27Z');
+
+insert into patient (patientId, patient_name, medical_record_number,DOB, address, gender, email,
+                     contactNumber, primary_care_doctor, preferred_pharmacy, hashed_password, creation_timestamp)
+values ('1f62b387-9277-4456-ab31-0e1cbb7488c0', 'Karen Hackett', '1601', '11/22/1973',
+        '{"street":"09311 Hyatt Mountains","city":"North Piperview","zipCode":"35481","state":"ME"}', 'M', 'HackettR@mail.com',
+        '610 240-7082','(315) 231-8631', 'Allenton Pharmacy', '$2y$10$LC6wXDfzQi7DaTTDZFLQbejiWw8.kwiIaKfBVZs50SnWRRZMsM7M6',
+        '2023-01-11T06:46:44Z');
+
+        <--PCP-->
+INSERT INTO primary_care_doctor (pcpID, name, locations, email) values ('bd9d67a2-57ee-4564-b9a6-e82db487b4eb',
+                                                                        'Dr.Frank Mertz', '{"office":"Oceantown Primary Care","street":"490 Van Corner","city":"Legrosborough","zipCode":"31258","state":"IN"}',
+                                                                        'MertzPcp@oceantownpcp.com');
+INSERT INTO primary_care_doctor (pcpID, name, locations, email) values ('68e62c31-fcd9-4d00-8859-1f34c629ccec',
+                                                                        'Dr.Patricia Ritzana', '{"office":"Caribbean Care","street":"756 Nostrand Ave","city":"Brooklyn","zipCode":"11225","state":"NY"}',
+                                                                        'Ritzana.Patricia@caribbeancare.com');
+
+CREATE TABLE practitioner (
+    scpID uuid not null,
+    practitionerName varchar not null,
+    practitionerSpecialtyType varchar not null,
+    practitionerEmailAddress varchar not null,
+    practitionerPhoneNumber varchar not null,
+    practiceLocation varchar not null,
+    practiceWebsite varchar,
+    UNIQUE (practitionerEmailAddress),
+    PRIMARY KEY (practitionerEmailAddress)
+);
+
+INSERT INTO practitioner (scpID, practitionerName, practitionerSpecialtyType, practitionerEmailAddress, practitionerPhoneNumber, practiceLocation, practiceWebsite)
+VALUES (
+        'f79eee59-f187-49b3-a204-17c7e361573c','Prince Davis ,PA', 'HOMEOPATHY', 'davisp.homeopathy@gmail.com', '646-888-2410',
+        '{"practice":"Homeopathic Care of Fieldburger", "street":"008 Torp Loop","city":"Perryview","zipCode":"27206","state":"KY"}',
+        'https://www.eun-stark.biz'
+       );
