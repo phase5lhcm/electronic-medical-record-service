@@ -41,7 +41,7 @@ tasks.named('test') {
 generateJava{
 	generateClient = true
 	typeMapping = ["Date"			: "java.time.LocalDate",
-					"NonnegativeInt": "java.lang.Integer",
+					"NonNegativeInt": "java.lang.Integer",
 					"Url"			: 'java.net.URL',
 					"DateTime"		: "java.time.OffsetDateTime"]
 }

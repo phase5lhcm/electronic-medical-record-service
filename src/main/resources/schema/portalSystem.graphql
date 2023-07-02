@@ -12,9 +12,9 @@ type Enquiry implements Searchable{
     title: String!
     message: String!
     patient: Patient
-    responseCount: NonNegativeInt!
+    enquiryResponseCount: NonNegativeInt!
     enquiryResponses: [Solution!]
-    messageResponse: [MessageResponse!]
+    messageResponse: [EnquiryResponse!]
 }
 
 #a message sent to the patient from the office

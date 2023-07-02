@@ -1,11 +1,10 @@
 package com.emr.graphql.datasource.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -18,6 +17,32 @@ public class Enquiry {
     private LocalDateTime createdDateTime;
     private String title;
     private String message;
+
+
+
+    public Patient getEnquiryCreatedBy() {
+        return enquiryCreatedBy;
+    }
+
+    public void setEnquiryCreatedBy(Patient enquiryCreatedBy) {
+        this.enquiryCreatedBy = enquiryCreatedBy;
+    }
+
+    public List<Enquiry> getEnquiryList() {
+        return enquiryList;
+    }
+
+    public void setEnquiryList(List<Enquiry> enquiryList) {
+        this.enquiryList = enquiryList;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "enquiry_created_by",nullable = false)
+    private Patient enquiryCreatedBy;
+    @OneToMany(mappedBy = "enquiry")
+    private List<Enquiry> enquiryList;
+
+
 
     public UUID getId() {
         return id;

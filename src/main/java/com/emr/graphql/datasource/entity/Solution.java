@@ -1,8 +1,6 @@
 package com.emr.graphql.datasource.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -17,6 +15,30 @@ public class Solution {
     @CreationTimestamp
     private LocalDateTime createdDateTime;
     private String title;
+
+    @ManyToOne
+    @JoinColumn(name = "solution_created_by", nullable = false)
+    private OfficeAssistant solutionCreatedBy;
+
+    @ManyToOne
+    @JoinColumn(name = "enquiry_id", nullable = false)
+    private Enquiry patientEnquiry;
+
+    public OfficeAssistant getSolutionCreatedBy() {
+        return solutionCreatedBy;
+    }
+
+    public void setSolutionCreatedBy(OfficeAssistant solutionCreatedBy) {
+        this.solutionCreatedBy = solutionCreatedBy;
+    }
+
+    public Enquiry getPatientEnquiry() {
+        return patientEnquiry;
+    }
+
+    public void setPatientEnquiry(Enquiry patientEnquiry) {
+        this.patientEnquiry = patientEnquiry;
+    }
 
     public UUID getId() {
         return id;
