@@ -28,22 +28,13 @@ public class Enquiry {
         this.enquiryCreatedBy = enquiryCreatedBy;
     }
 
-    public List<Enquiry> getEnquiryList() {
-        return enquiryList;
-    }
-
-    public void setEnquiryList(List<Enquiry> enquiryList) {
-        this.enquiryList = enquiryList;
-    }
-
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "enquiry_created_by",nullable = false)
     private Patient enquiryCreatedBy;
-    @OneToMany(mappedBy = "enquiry")
-    private List<Enquiry> enquiryList;
 
-
-
+    @OneToOne
+    @JoinColumn(name = "solution")
+    private Solution solution;
     public UUID getId() {
         return id;
     }
