@@ -1,19 +1,18 @@
 package com.emr.graphql.datasource.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "patient")
 public class Patient {
     @Id
-    private UUID patiendId;
+    private UUID patientId;
     private String patientName;
     private Integer medicalRecordNumber;
     private String DOB;
@@ -28,13 +27,25 @@ public class Patient {
     private LocalDateTime create_time;
     @CreationTimestamp
     private LocalDate dateProfileCreated;
+    @OneToMany(mappedBy = "enquiry")
+    private List<Enquiry> enquiryList;
+    @OneToOne(mappedBy = "enquiry")
+    private Enquiry patientEnquiry;
 
-    public UUID getPatiendId() {
-        return patiendId;
+    public Enquiry getPatientEnquiry() {
+        return patientEnquiry;
     }
 
-    public void setPatiendId(UUID patiendId) {
-        this.patiendId = patiendId;
+    public void setPatientEnquiry(Enquiry patientEnquiry) {
+        this.patientEnquiry = patientEnquiry;
+    }
+
+    public UUID getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(UUID patientId) {
+        this.patientId = patientId;
     }
 
     public String getPatientName() {
@@ -132,4 +143,13 @@ public class Patient {
     public void setDateProfileCreated(LocalDate dateProfileCreated) {
         this.dateProfileCreated = dateProfileCreated;
     }
+
+    public List<Enquiry> getEnquiryList() {
+        return enquiryList;
+    }
+
+    public void setEnquiryList(List<Enquiry> enquiryList) {
+        this.enquiryList = enquiryList;
+    }
+
 }

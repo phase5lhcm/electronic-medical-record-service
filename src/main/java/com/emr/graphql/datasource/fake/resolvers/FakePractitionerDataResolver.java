@@ -1,4 +1,4 @@
-package com.emr.graphql.component.resolvers;
+package com.emr.graphql.datasource.fake.resolvers;
 
 import com.emr.graphql.datasource.fake.FakePractitionerDAO;
 import com.netflix.dgs.codegen.generated.types.Practitioner;

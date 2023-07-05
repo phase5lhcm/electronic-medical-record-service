@@ -16,11 +16,11 @@ public class Solution {
     private LocalDateTime createdDateTime;
     private String title;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "solution_created_by", nullable = false)
     private OfficeAssistant solutionCreatedBy;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "enquiry_id", nullable = false)
     private Enquiry patientEnquiry;
 

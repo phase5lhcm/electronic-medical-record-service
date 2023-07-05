@@ -21,6 +21,8 @@ type Query {
 }
 
 type Mutation {
+    officeAssistantCreate(officeAssistant: OfficeAssistantInput!): OfficeAssistantResponse!
+    officeAssistantLogin(officeAssistant: OfficeAssistantInput!): OfficeAssistantResponse!
     patientCreate(patient: PatientCreateInput!): PatientResponse!
     patientLogin(patient: PatientLoginInput!): PatientResponse!
     patientDeactivate(patient: PatientDeactivateInput!): PatientDeactivateResponse!

@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS patient;
+DROP TABLE IF EXISTS pharmacy;
+DROP TABLE IF EXISTS enquiry;
+
 CREATE TABLE patient (
     patientId UUID NOT NULL,
     patient_name varchar(100) NOT NULL,
@@ -14,7 +18,6 @@ CREATE TABLE patient (
     UNIQUE (email),
     UNIQUE (medical_record_number),
     PRIMARY KEY (medical_record_number)
-
 );
 
 insert into patient (patientId, patient_name, medical_record_number,DOB, address, gender, email,
@@ -33,7 +36,15 @@ values ('1f62b387-9277-4456-ab31-0e1cbb7488c0', 'Karen Hackett', '1601', '11/22/
         '610 240-7082','(315) 231-8631', 'Allenton Pharmacy', '$2y$10$LC6wXDfzQi7DaTTDZFLQbejiWw8.kwiIaKfBVZs50SnWRRZMsM7M6',
         '2023-01-11T06:46:44Z');
 
-        <--PCP-->
+CREATE TABLE primary_care_doctor (
+    pcpID UUID NOT NULL,
+    name varchar NOT NULL,
+    locations varchar,
+    email varchar,
+    UNIQUE (email),
+    PRIMARY KEY (email)
+);
+
 INSERT INTO primary_care_doctor (pcpID, name, locations, email) values ('bd9d67a2-57ee-4564-b9a6-e82db487b4eb',
                                                                         'Dr.Frank Mertz', '{"office":"Oceantown Primary Care","street":"490 Van Corner","city":"Legrosborough","zipCode":"31258","state":"IN"}',
                                                                         'MertzPcp@oceantownpcp.com');
@@ -59,3 +70,62 @@ VALUES (
         '{"practice":"Homeopathic Care of Fieldburger", "street":"008 Torp Loop","city":"Perryview","zipCode":"27206","state":"KY"}',
         'https://www.eun-stark.biz'
        );
+
+CREATE TABLE pharmacy(
+    id uuid not null,
+    name varchar,
+    contactNumber varchar not null,
+    zipCode varchar,
+    website varchar
+);
+
+insert into pharmacy (id, name, contactNumber, zipCode, website)
+VALUES ('fc5ef255-21bf-4552-9f58-dc97efac45df', 'Your Neighborhood Drugs'
+,'674-999-0123', '76211', 'yourneighborhooddrugs@mail.com');
+
+ALTER TABLE pharmacy ADD PRIMARY KEY (id);
+
+CREATE TABLE officeAssistant (
+    id uuid not null,
+    username varchar,
+    email varchar
+);
+
+insert into officeAssistant (id, username, email) values ('7449d121-31ee-4789-91ca-e2e740e92067', 'cmaynard', 'cmaynard@mskcc.org');
+insert into officeAssistant (id, username, email) values ('96e04c30-cbda-4fa1-9956-e0557a2329cb', 'jtikes', 'jtikes@mskcc.org');
+
+CREATE TABLE enquiry (
+    id UUID NOT NULL,
+    title varchar(50) NOT NULL,
+    "message" text NOT NULL,
+    created_date_time timestamp NOT NULL,
+    created_by int not null,
+    PRIMARY KEY (id)
+);
+
+ALTER TABLE enquiry ADD CONSTRAINT enquiry_patient_fk FOREIGN KEY (created_by) REFERENCES patient(medical_record_number);
+
+insert into enquiry (id, created_date_time, title, message, created_by) values ('1b0e6213-3dc1-46a2-90af-b85654c64297', '2023-02-11T09:41:14Z', 'Need appointment for blood test', 'Hello, I need an appointment for an updated blood test please. Especially CBC and CEA', '1213');
+insert into enquiry (id, created_date_time, title, message, created_by) values ('401c0722-6032-4228-a0ca-e830695a414c', '2023-02-14T03:16:32Z', 'Subdural hemorrhage following injury', 'I am going to forward a picture that shows the burn of first degree of unspecified shoulder, initial encounter','1213');
+
+ALTER TABLE officeAssistant ADD CONSTRAINT ADD PRIMARY KEY (email);
+
+CREATE TABLE SOLUTION (
+                          id uuid NOT NULL,
+                          title varchar(70) NOT NULL,
+                          "message" text NOT NULL,
+                          creation_timestamp timestamp NOT NULL,
+                          created_by varchar NOT NULL,
+                          enquiry_id uuid NOT NULL,
+                          PRIMARY KEY (id)
+);
+
+ALTER TABLE solution ADD CONSTRAINT solution_officeAssistant_fk FOREIGN KEY (created_by) REFERENCES officeAssistant(email);
+ALTER TABLE solution ADD CONSTRAINT solution_enquiry_fk FOREIGN KEY (enquiry_id) REFERENCES enquiry(id);
+
+
+
+
+
+
+
