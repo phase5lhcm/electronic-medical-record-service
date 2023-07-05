@@ -18,8 +18,6 @@ public class Enquiry {
     private String title;
     private String message;
 
-
-
     public Patient getEnquiryCreatedBy() {
         return enquiryCreatedBy;
     }
@@ -65,5 +63,13 @@ public class Enquiry {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Solution getSolution() {
+        return solution;
+    }
+
+    public void setSolution(Solution solution) {
+        this.solution = solution;
     }
 }
