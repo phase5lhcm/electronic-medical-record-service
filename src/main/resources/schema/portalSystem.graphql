@@ -2,6 +2,8 @@ type OfficeAssistant {
     id: ID!
     username: String!
     email: String!
+    solution: Solution
+    solutionList: [Solution]
 }
 
 #a message sent to the office from a patient
@@ -45,6 +47,11 @@ input EnquiryCreateInput {
     content: String!
 }
 
+input OfficeAssistantInput {
+    name: String!
+    emailAddress: String!
+}
+
 #the office assistant must identify the response to the enquiry
 # by using the enquiry id and title
 input SolutionCreateInput {
@@ -61,4 +68,9 @@ type EnquiryResponse {
 #a response generated when a solution is created
 type SolutionResponse {
     solution: Solution
+}
+
+#a response generated when an office assistant is created
+type OfficeAssistantResponse {
+    officeAssistant: OfficeAssistant
 }

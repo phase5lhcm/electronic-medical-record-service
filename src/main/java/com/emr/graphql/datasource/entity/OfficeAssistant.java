@@ -2,8 +2,10 @@ package com.emr.graphql.datasource.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,6 +16,16 @@ public class OfficeAssistant {
     private String name;
     private String email;
 
+    public List<Solution> getSolutionList() {
+        return solutionList;
+    }
+
+    public void setSolutionList(List<Solution> solutionList) {
+        this.solutionList = solutionList;
+    }
+
+    @OneToMany(mappedBy = "solution")
+    private List<Solution> solutionList;
     public UUID getId() {
         return id;
     }

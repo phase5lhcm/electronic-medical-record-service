@@ -4,9 +4,9 @@ import com.emr.graphql.datasource.entity.*;
 import com.netflix.dgs.codegen.generated.types.UserAuthToken;
 import com.ocpsoft.pretty.time.PrettyTime;
 
-import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
 
 public class GraphqlBeanMapper {
 
@@ -19,8 +19,12 @@ public class GraphqlBeanMapper {
     public static com.netflix.dgs.codegen.generated.types.Patient mapToGraphql(Patient original){
         var result = new com.netflix.dgs.codegen.generated.types.Patient();
         var messageCreateDateTime = original.getCreate_time().atOffset(ZONE_OFFSET);
+        var enquiries = original.getEnquiryList().stream()
+                        .map(GraphqlBeanMapper::mapToGraphql)
+                                .collect(Collectors.toList());
+        var enquiry = mapToGraphql(original.getPatientEnquiry());
 
-        result.setPatientID(original.getPatiendId().toString());
+        result.setPatientID(original.getPatientId().toString());
         result.setName(original.getPatientName());
         result.setEmail(original.getEmail());
         result.setDOB(original.getDOB());
@@ -31,6 +35,8 @@ public class GraphqlBeanMapper {
 //        result.setPreferredPharmacy(original.getPreferredPharmacy());
         result.setDateProfileCreated(messageCreateDateTime.toLocalDate());
         result.setDateProfileCreated(original.getDateProfileCreated());
+        result.setEnquiry(enquiry);
+        result.setMessages(enquiries);
 
         return result;
     }
@@ -40,6 +46,7 @@ public class GraphqlBeanMapper {
         result.setId(original.getId().toString());
         result.setUsername(original.getName());
         result.setEmail(original.getEmail());
+
 
         return result;
     }

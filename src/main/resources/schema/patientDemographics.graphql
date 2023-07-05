@@ -9,7 +9,8 @@ type Patient {
     contactNumber: String
     primary: PrimaryCareDoctor
     preferredPharmacy: Pharmacy
-    message: [Enquiry!]
+    enquiry: Enquiry
+    messages: [Enquiry!]
     messageCreatedDateTime: DateTime!
     prettyCreateDateTime: String
     dateProfileCreated: Date
@@ -40,6 +41,7 @@ type Specialty {
 }
 
 type Address {
+    id: ID!
     street: String!
     city: String!
     zipCode: String
